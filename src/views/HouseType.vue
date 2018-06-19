@@ -85,7 +85,7 @@
 </template>
 <script type="es6">
     import {getStoreLists, getHouseLists,getScreenArea } from '../api/api.js'
-    import defaultImg from '../assets/images/default.jpg'
+    import defaultImg from '../assets/images/room_default.jpg'
     import { isNull } from '../util/index.js'
     export default{
         data(){
@@ -156,35 +156,35 @@
                     },{
                         name:'1000以下',
                         isActive:false,
-                        Rental:'1'
+                        Rental:'a'
                     },{
                         name:'1000-2000',
                         isActive:false,
-                        Rental:'2'
+                        Rental:'b'
                     },{
                         name:'2000-3000',
                         isActive:false,
-                        Rental:'3'
+                        Rental:'c'
                     },{
                         name:'3000-4000',
                         isActive:false,
-                        Rental:'4'
+                        Rental:'d'
                     },{
                         name:'4000-5000',
                         isActive:false,
-                        Rental:'5'
+                        Rental:'e'
                     },{
                         name:'5000-6000',
                         isActive:false,
-                        Rental:'6'
+                        Rental:'f'
                     },{
                         name:'6000-7000',
                         isActive:false,
-                        Rental:'7'
+                        Rental:'g'
                     },{
                         name:'7000-8000',
                         isActive:false,
-                        Rental:'8'
+                        Rental:'h'
                     }
                 ],
                 checkedScreenLists:[],
@@ -196,15 +196,6 @@
                 page : 1,
                 pageSize : 10
             }
-        },
-        beforeRouteEnter (to,from,next) {
-            next(vm =>{
-                document.body.style.backgroundColor = '#eee'
-            })
-        },
-        beforeRouteLeave(to,from,next){
-            document.body.style.backgroundColor = '#fff'
-            next()
         },
         mounted(){
             this.$nextTick(() => {
@@ -372,7 +363,7 @@
             },
             //获取区域筛选条件
             getScreenAreaFunc(){
-                getScreenArea().then(response => {
+                getScreenArea({CityCode:"310100",AreaCode:"",Type:2}).then(response => {
                     var data = [{
                         AreaName:'不限',
                         AreaId:null,
@@ -395,10 +386,12 @@
             initScreen(){
                 // url传id
                 if(this.$route.query.id){
+                    console.log(this.screenVillageLists)
                     for(var i =0;i<this.screenVillageLists.length;i++){
-                        if(this.$route.query.id == this.screenVillageLists[i].PropertyId){
+                        console.log(this.screenVillageLists[i].PStructId)
+                        if(this.$route.query.id == this.screenVillageLists[i].PStructId){
                             this.checkedScreenLists.push({
-                                name:this.screenVillageLists[i].Name,
+                                name:this.screenVillageLists[i].villageName,
                                 type:2,
                                 index: i
                             })
@@ -406,32 +399,7 @@
                             this.screenVillageLists[i].isActive = true
                         }
                     }
-
-                }
-            },
-            //手机模式筛选条件
-            showModelPhoneScreenLists(val){
-                if(val == 1){
-                    this.modelPhoneScreenLists2 = false
-                    this.modelPhoneScreenLists3 = false
-                    this.modelPhoneScreenLists4 = false
-                }else if(val == 2){
-                    this.modelPhoneScreenLists1 = false
-                    this.modelPhoneScreenLists3 = false
-                    this.modelPhoneScreenLists4 = false
-                }else if(val ==3){
-                    this.modelPhoneScreenLists1 = false
-                    this.modelPhoneScreenLists2 = false
-                    this.modelPhoneScreenLists4 = false
-                }else if(val ==4){
-                    this.modelPhoneScreenLists1 = false
-                    this.modelPhoneScreenLists2 = false
-                    this.modelPhoneScreenLists3 = false
-                }
-                if(this["modelPhoneScreenLists"+val] == false){
-                    this["modelPhoneScreenLists"+val]= true
-                }else{
-                    this["modelPhoneScreenLists"+val] = false
+                    console.log(this.checkedScreenLists)
                 }
             },
         },
@@ -452,7 +420,6 @@
                         isActive   : false
                     })
                 }
-                console.log(data)
                 this.screenVillageLists = data
                 this.initScreen()
             }).catch( error=> {

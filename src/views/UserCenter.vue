@@ -22,15 +22,15 @@
 				<el-form-item label="电子邮箱：" prop="EMail" class="fl50">
 					<span class="span">{{ (PersonalInformation.EMail == null || PersonalInformation.EMail == '') ? "-" : PersonalInformation.EMail }}</span>
 				</el-form-item>
-				<el-form-item label="性别：" prop="Sex" class="fl50">
+				<!-- <el-form-item label="性别：" prop="Sex" class="fl50">
 					<span v-if="PersonalInformation.Sex == 1" class="span">男</span>
 					<span v-else-if="PersonalInformation.Sex == 2" class="span">女</span>
-					<span v-else class="span">女</span>
+					<span v-else class="span"></span>
 				</el-form-item>
 				<el-form-item label="名族：" prop="Nation" class="fl50">
 					<span class="span">{{ (PersonalInformation.Nation == null || PersonalInformation.Nation == '') ? "-" : PersonalInformation.Nation }}</span>
-				</el-form-item>
-				<el-form-item label="学历：" prop="Cultural" class="fl50">
+				</el-form-item> -->
+				<!-- <el-form-item label="学历：" prop="Cultural" class="fl50">
 					<span v-if="PersonalInformation.Cultural == 0" class="span">博士</span>
 					<span v-else-if="PersonalInformation.Cultural == 1" class="span">硕士</span>
 					<span v-else-if="PersonalInformation.Cultural == 2" class="span">本科</span>
@@ -47,8 +47,8 @@
 					<span v-else-if="PersonalInformation.MarryInfo == 3" class="span">离婚、离异</span>
 					<span v-else-if="PersonalInformation.MarryInfo == 4" class="span">丧偶</span>
 					<span v-else class="span">-</span>
-				</el-form-item>
-				<el-form-item label="联系人：" prop="LinkMan" class="fl50">
+				</el-form-item> -->
+				<!-- <el-form-item label="联系人：" prop="LinkMan" class="fl50">
 					<span class="span">{{ (PersonalInformation.LinkMan == '' || PersonalInformation.LinkMan == null) ? "-" : PersonalInformation.LinkMan }}</span>
 				</el-form-item>
 				<el-form-item label="联系人电话：" prop="LinkPhone" class="fl50">
@@ -59,7 +59,7 @@
 				</el-form-item>
 				<el-form-item label="户籍邮编：" prop="HouseholdPostalCode" class="fl50">
 					<span class="span">{{ (PersonalInformation.HouseholdPostalCode == '' || PersonalInformation.HouseholdPostalCode == null) ? "-" : PersonalInformation.HouseholdPostalCode }}</span>
-				</el-form-item>
+				</el-form-item> -->
 			</el-form>
 		</div>
 
@@ -88,15 +88,6 @@ export default {
 				HouseholdPostalCode: ''
 			},
 		}
-	},
-	beforeRouteEnter(to, from, next) {
-		next(vm => {
-			document.body.style.backgroundColor = '#eee'
-		})
-	},
-	beforeRouteLeave(to, from, next) {
-		document.body.style.backgroundColor = '#fff'
-		next()
 	},
 	methods: {
 		getUserInfoMessage(params) {

@@ -4,7 +4,7 @@
 body {
     font-family:"Microsoft yahei", Arial, Verdana;
     font-size: 14px;
-    background: #fff;
+    background: #eee;
 }
 .el-message{
     top: 70px !important;
@@ -222,7 +222,8 @@ p {
     color:#f44336;
 }
 .green{
-    color:#009688;
+    /*color:#bb0068;*/
+    color:#bb0068;
 }
 .c-3{
     color:#333;
@@ -246,7 +247,7 @@ p {
     background-color: #fff;
 }
 .bg-green{
-    background: #009688;
+    background: #bb0068;
 }
 .bg-red{
     background: #f44336;
@@ -325,7 +326,7 @@ p {
     margin-right: auto;
 }
 .el-dialog__header{
-    background: #009688!important;
+    background: #bb0068!important;
 }
 .el-dialog__header .el-dialog__title,
 .el-dialog__headerbtn .el-dialog__close{
@@ -339,7 +340,7 @@ p {
     font-weight:normal;
 }
 .breadcrumb_nav .el-breadcrumb .el-breadcrumb__item .is-link:hover{
-    color: #009688;
+    color: #bb0068;
 }
 /*小区-房源*/
 /*面包屑-搜索*/
@@ -385,7 +386,7 @@ p {
 
 }
 .screen-wrap .screen-item ul li.active{
-    color:#009688;
+    color:#bb0068;
 }
 
 .clear-screen{
@@ -396,7 +397,7 @@ p {
     padding:5px 0;
 }
 .clear-screen ul li{
-    background: #009688;
+    background: #bb0068;
     color:#fff;
     padding:0 13px;
     height:30px;
@@ -438,18 +439,19 @@ p {
 .village-house-wrap ul li img{
     width:300px;
     height:160px;
+    border-radius: 3px;
 }
 .village-house-wrap ul li a>div{
     width:810px;
 }
 .village-house-wrap ul li:hover div h4{
-    color:#009688;
+    color:#bb0068;
 }
 .village-house-wrap ul li a.lookForhouse{
     right:15px;
 }
 .village-house-wrap ul li a.lookForhouse:hover{
-    color:#009688;
+    color:#bb0068;
 }
 .village-house-wrap .el-pagination{
     padding:20px 0 30px;
@@ -478,7 +480,7 @@ p {
     border-bottom: 1px solid #e8e8e8;
 }
 .villageDetails-item-top>ul{
-    border-bottom:2px solid #009688;
+    border-bottom:2px solid #bb0068;
 }
 .villageDetails-item-top>ul li{
     float: left;
@@ -488,7 +490,7 @@ p {
     text-align: center;
 }
 .villageDetails-item-top>ul li.active{
-    background: #009688;
+    background: #bb0068;
 }
 .villageDetails-item-top>ul li a{
     display: block;
@@ -498,7 +500,7 @@ p {
     color:#fff;
 }
 .villageDetails-item-top>ul li:hover a{
-    color:#009688;
+    color:#bb0068;
 }
 .villageDetails-item-top-cont{
     padding-top: 20px;
@@ -550,7 +552,7 @@ p {
     margin-top:33px;
 }
 .village-info-fir a:hover{
-    color:#009688;
+    color:#bb0068;
 }
 ul.village-info-sec li{
     margin-top:12px;

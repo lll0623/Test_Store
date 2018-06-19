@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <ComHeader/>
-        <div class="wapper" ref="box">
+        <div class="wapper" ref="box" :class="{new_login:headToggle===1}">
             <keep-alive>
                 <router-view v-if='$route.meta.keepAlive'/>
             </keep-alive>
@@ -23,18 +23,21 @@ export default {
         ComHeader,
         Footer
     },
+    computed : {
+        ...mapGetters(['headToggle']),
+    },
     mounted(){
+        console.log(this.$store.getters.headToggle)
         this.$nextTick(() =>{
-            this.$refs.box.style.minHeight = (document.documentElement.clientHeight - document.getElementById('footer').offsetHeight - document.getElementById('header').offsetHeight -30) +'px'
+
+                this.$refs.box.style.minHeight = (document.documentElement.clientHeight - document.getElementById('footer').offsetHeight - document.getElementById('header').offsetHeight -30) +'px'
+
         });
     },
 }
 </script>
 
 <style lang='scss'>
-.wapper{
-    padding-top:60px;
-}
 body{
     /*overflow-x: hidden;*/
     .wapper{
@@ -45,5 +48,7 @@ body{
         min-width:200px!important;
     }
 }
-
+.new_login{
+    padding-top:0!important;
+}
 </style>

@@ -55,26 +55,9 @@ export default {
               this.$message.error(error)
           })
     },
-    beforeRouteEnter (to,from,next) {
-        next(vm =>{
-            document.body.style.backgroundColor = '#eee'
-        })
-    },
-    beforeRouteLeave(to,from,next){
-        document.body.style.backgroundColor = '#fff'
-        next()
-    },
-  head() {
-    return {
-      meta: [{
-        hid: 'description',
-        name: 'description'
-      }]
-    }
-  }
 }
 </script>
-<style media="screen">
+<style media="screen" lang="scss">
 .viewImg{
   margin: 30px;
 }
@@ -88,7 +71,12 @@ export default {
 .title:hover {
   color: #333 !important;
 }
-.news p{
-    padding: 15px 0;
+.news {
+    img{
+        width:100%!important;
+    }
+    p{
+        padding: 15px 0;
+    }
 }
 </style>

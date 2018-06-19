@@ -45,7 +45,7 @@
                 </el-menu>
             </div>
         </div>
-        <div class="login-header header clearfix" v-if="headToggle===1" style="background:#fff;">
+        <div class="login-header header clearfix" v-if="headToggle===1" :class="{new_login:headToggle===1}">
             <router-link to="/" class="fl block">
                 <img src="../assets/images/logo2.png" class="logo vm marR15">
             </router-link>
@@ -176,7 +176,7 @@ export default {
                 display: block;
                 font-size:16px;
                 &.router-link-active,&:hover{
-                    color:#009688!important;
+                    color:#bb0068!important;
                 }
             }
         }
@@ -199,7 +199,7 @@ export default {
             &.is-opened{
                 .el-submenu__title{
                     span{
-                        color:#009688!important;
+                        color:#bb0068!important;
                     }
                 }
             }
@@ -305,7 +305,7 @@ div.el-menu--horizontal{
             &:hover{
                 background: #ddd;
                 span{
-                    color:#009688!important;
+                    color:#bb0068!important;
 
                 }
             }
@@ -314,5 +314,8 @@ div.el-menu--horizontal{
 }
 .login-header{
     box-shadow: 0px 6px 30px #ddd;
+}
+.new_login{
+    background:rgba(255,255,255,0.5);position:fixed;top:0;left:0;width:100%;
 }
 </style>

@@ -15,13 +15,13 @@
                                         <div class="thumb">
                                             <img v-lazy="(item.MainPic == null) ? localImg :item.MainPic" :alt="item.FullHead">
                                         </div>
-                                    <div class="info-box">
-                                        <div class="info-row title-row">
-                                                <span class="title" :style="{color:'#'+item.FullheadColor}">{{ item.FullHead }}</span>
-                                            <div class="date">{{ item.CreateDate }}</div>
+                                        <div class="info-box">
+                                            <div class="info-row title-row">
+                                                    <span class="title" :style="{color:'#'+item.FullheadColor}">{{ item.FullHead }}</span>
+                                                <div class="date">{{ item.CreateDate }}</div>
+                                            </div>
+                                            <div class="content-view" v-html="unescape(item.NewsContent)"></div>
                                         </div>
-                                        <div class="content-view" v-html="unescape(item.NewsContent)"></div>
-                                    </div>
                                 </div>
                             </div>
                         </router-link>
@@ -40,7 +40,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { getNews } from '../api/api.js'
-import defaultImg from '../assets/images/default.jpg'
+import defaultImg from '../assets/images/room_default.jpg'
 
   export default {
     name: 'news-guide',
@@ -68,15 +68,6 @@ import defaultImg from '../assets/images/default.jpg'
               this.$refs.box.style.minHeight = (document.documentElement.clientHeight - document.getElementById('footer').offsetHeight - document.getElementById('header').offsetHeight -30) +'px'
           });
       },
-    beforeRouteEnter (to,from,next) {
-        next(vm =>{
-            document.body.style.backgroundColor = '#eee'
-        })
-    },
-    beforeRouteLeave(to,from,next){
-        document.body.style.backgroundColor = '#fff'
-        next()
-    },
     methods:{
         //改变当前页数
         handleCurrentChange(val) {
@@ -156,13 +147,16 @@ import defaultImg from '../assets/images/default.jpg'
     width: 11.9rem;
     height: 11.75rem;
     background-color: #f1f1f1;
-    border-radius: 2px;
+    border-radius: 3px;
     cursor: pointer;
+    position:relative;
 }
 
 .thumb img {
+    position: absolute;
     width: 100%;
-    height: 100%;
+    height:100%;
+    border-radius: 3px;
 }
 
 .title-row {
@@ -180,7 +174,7 @@ import defaultImg from '../assets/images/default.jpg'
 }
 
 .title:hover {
-    color: #009688;
+    color: #bb0068;
 }
 
 .date {

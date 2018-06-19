@@ -110,21 +110,12 @@
 import { getStoreDetails } from '../api/api.js'
 import { getScrollTop } from '../util/index.js'
 import BMap from 'BMap'
-import defaultImg from '../assets/images/default.jpg'
+import defaultImg from '../assets/images/room_default.jpg'
 import dwImg from '../assets/images/dw.png'
 import aroundPos from '../assets/images/aroundPos.png'
 import aroundPosActive from '../assets/images/aroundPosActive.png'
 var mapVillage;
 export default {
-	beforeRouteEnter(to, from, next) {
-		next(vm => {
-			document.body.style.backgroundColor = '#eee'
-		})
-	},
-	beforeRouteLeave(to, from, next) {
-		document.body.style.backgroundColor = '#fff'
-		next()
-	},
 	data() {
 		return {
 			defaultImg,
@@ -384,7 +375,7 @@ export default {
 
 			map.centerAndZoom(mPoint, 15);
 			var circle = new BMap.Circle(mPoint, this.distence, {
-				fillColor: "#009688",
+				fillColor: "#bb0068",
 				strokeWeight: 1,
 				fillOpacity: 0.3,
 				strokeOpacity: 0.3
@@ -571,13 +562,13 @@ export default {
         line-height: 26px;
         text-align: center;
         cursor: pointer;
-        border: 1px solid #009688;
+        border: 1px solid #bb0068;
         margin-right: 5px;
         color: #333;
     }
     ul li.active {
         color: #fff;
-        background-color: #009688;
+        background-color: #bb0068;
     }
 }
 .site-title {
@@ -626,7 +617,7 @@ export default {
             width: 24px;
             height: 24px;
             line-height: 24px;
-            background-color: #009688;
+            background-color: #bb0068;
             color: #fff;
             text-align: center;
             border-radius: 50%;

@@ -7,14 +7,14 @@ import store from '../store'
 
 //axios 配置
 axios.default.timeout = 500
-axios.defaults.baseURL = 'http://112.124.110.11:8043'
+axios.defaults.baseURL = 'http://106.14.135.56:8042'
 
 //axios httpHeader固定参数
 axios.interceptors.request.use(
     config => {
         var userInfo = getCookie('userInfo') || ''
         if (userInfo) {  // 每次发送请求之前判断是否存在token，如果存在，则统一在http请求的header都加上token，不用每次请求都手动添加了
-            config.headers.token = JSON.parse(userInfo).token.Token;
+            config.headers.token = JSON.parse(userInfo).Token;
             config.headers.timestamp =  generateMixed(32);
             config.headers.nonce =  generateMixed(32);
             config.headers.signature =  generateMixed(32);

@@ -22,14 +22,14 @@
                 <div class="fl marR30 villageDetails-item-top-cont-fir rel">
                     <swiper :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
                         <swiper-slide v-for="(banner,index) in banners" :key="index">
-                            <img :src="banner">
+                            <img :src="banner.Url">
                         </swiper-slide>
                         <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
                         <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
                     </swiper>
                     <swiper :options="swiperOptionThumbs" class="gallery-thumbs" ref="swiperThumbs">
                         <swiper-slide v-for="(banner,index) in banners" :key="index">
-                            <img :src="banner">
+                            <img :src="banner.Url">
                         </swiper-slide>
                     </swiper>
                 </div>
@@ -62,7 +62,7 @@
                     <div class="houseDetailsBtn clearfix">
                         <el-button class="fl" type="primary" @click="dialogReservation = true">预约看房</el-button>
                         <el-button class="fl" type="primary" plain @click="dialogOnline = true">在线预定</el-button>
-                    </div>
+                    </div> 
                 </div>
             </div>
         </div>
@@ -70,15 +70,11 @@
         <!-- 房间配置 -->
         <div id="#anchor-1" class='houseConfig pad15 marT30'>
             <h2 class="site-title">户型配置</h2>
-            <ul class="clearfix">
-                <li class="fl" v-for="(item,index) in houseConfig" :key="index">
-                    <i class="fa fa-snowflake-o fa-4x" aria-hidden="true" v-if="item.Name == '冰箱'"></i>
-                    <i class="fa fa-y-combinator fa-4x" aria-hidden="true" v-if="item.Name == '椅子'"></i>
-                    <i class="fa fa-telegram fa-4x" aria-hidden="true" v-if="item.Name == '衣柜'"></i>
-                    <i class="fa fa-eercast fa-4x" aria-hidden="true" v-if="item.Name == '书桌'"></i>
-                    <i class="fa  fa-bath fa-4x" aria-hidden="true" v-if="item.Name == '热水器'"></i>
-                    <h4 class="fs20 green">{{item.Name}}</h4>
-                    <p>数量<span class="red">{{item.Num}}</span></p>
+            <ul class="clearfix houseCongfigLists">
+                <li class="fl" v-for="(item,index) in houseConfig" :key="index" :class="{ green: item.active }">
+                    <i class="iconfont" v-html="item.iconfont"></i>
+                    <h4 class="fs20">{{item.name}}</h4>
+
                 </li>
             </ul>
         </div>
@@ -172,22 +168,13 @@
 import { getHouseTypeDetails,getReservationHouse,getSMSHelper } from '../api/api.js'
 import { getScrollTop,formatDate } from '../util'
 import BMap from 'BMap'
-import defaultImg from '../assets/images/default.jpg'
+import defaultImg from '../assets/images/room_default.jpg'
 import dwImg from '../assets/images/dw.png'
 import aroundPos from '../assets/images/aroundPos.png'
 import aroundPosActive from '../assets/images/aroundPosActive.png'
 import md5 from 'js-md5'
 var mapVillage;
 export default {
-    beforeRouteEnter(to, from, next) {
-        next(vm => {
-            document.body.style.backgroundColor = '#eee'
-        })
-    },
-    beforeRouteLeave(to, from, next) {
-        document.body.style.backgroundColor = '#fff'
-        next()
-    },
     data() {
         var validatePhoneNum = (rule, value, callback) => {
 			let reg = /^((13|14|15|17|18)[0-9]{1}\d{8})$/;
@@ -222,7 +209,7 @@ export default {
             if(value === ''){
                 callback(new Error('预约看房时间不能为空'));
             }else if(nowTime>=selTime){
-                callback(new Error('请重新选择看房时间'));
+                callback(new Error('您所选的时间不能看房，请重新选择看房时间'));
             }else{
                 callback()
             }
@@ -282,7 +269,92 @@ export default {
             similarityLists: [],
             //该小区下是否有房源
             showSimilarityLists: true,
-            houseConfig:[],
+            houseConfig:[
+                {
+                    iconfont :'&#xe636;',
+                    Type:'1',
+                    Num : '0',
+                    name: 'wifi',
+                    active:false,
+                },
+                {
+                    iconfont :'&#xe621;',
+                    Type:'2',
+                    Num : '0',
+                    name: '空调',
+                    active:false,
+                },
+                {
+                    iconfont :'&#xe66f;',
+                    Type:'3',
+                    Num : '0',
+                    name: '热水器',
+                    active:false,
+                },
+                {
+                    iconfont :'&#xe65f;',
+                    Type:'4',
+                    Num : '0',
+                    name: '洗衣机',
+                    active:false,
+                },
+                {
+                    iconfont :'&#xe622;',
+                    Type:'5',
+                    Num : '0',
+                    name: '冰箱',
+                    active:false,
+                },
+                {
+                    iconfont :'&#xe66c;',
+                    Type:'9',
+                    Num : '0',
+                    name: '油烟机',
+                    active:false,
+                },
+                {
+                    iconfont :'&#xe60a;',
+                    Type:'11',
+                    Num : '0',
+                    name: '床',
+                    active:false,
+                },
+                {
+                    iconfont :'&#xe612;',
+                    Type:'12',
+                    Num : '0',
+                    name: '书桌',
+                    active:false,
+                },
+                {
+                    iconfont :'&#xe602;',
+                    Type:'13',
+                    Num : '0',
+                    name: '衣柜',
+                    active:false,
+                },
+                {
+                    iconfont :'&#xe603;',
+                    Type:'14',
+                    Num : '0',
+                    name: '沙发',
+                    active:false,
+                },
+                {
+                    iconfont :'&#xe604;',
+                    Type:'23',
+                    Num : '0',
+                    name: '椅子',
+                    active:false,
+                },
+                {
+                    iconfont :'&#xe639;',
+                    Type:'24',
+                    Num : '0',
+                    name: '飘窗',
+                    active:false,
+                },
+            ],
 
             //预约房间
             dialogReservation :false,
@@ -531,7 +603,7 @@ export default {
 
             map.centerAndZoom(mPoint, 15);
             var circle = new BMap.Circle(mPoint, this.distence, {
-                fillColor: "#009688",
+                fillColor: "#bb0068",
                 strokeWeight: 1,
                 fillOpacity: 0.3,
                 strokeOpacity: 0.3
@@ -658,7 +730,7 @@ export default {
                 switch (response.StatusCode) {
                     case 200:
                     this.houseId = response.Data.BaseInfo.Id //小区id
-                    this.houseName = response.Data.BaseInfo.BName //全称
+                    this.houseName = response.Data.BaseInfo.BName + '/' +  response.Data.BaseInfo.Name//全称
                     this.houseArea = (response.Data.BaseInfo.Area == null || response.Data.BaseInfo.Area == '') ? '0' : response.Data.BaseInfo.Area//面积
                     this.address = response.Data.BaseInfo.Address //地址
                     this.monthlyRent = response.Data.BaseInfo.MinPrice//月租金
@@ -675,12 +747,20 @@ export default {
                         this.showSimilarityLists = false
                     }
                     if (response.Data.Imagelist.length == 0) {
-                        this.banners.push(defaultImg)
+                        this.banners.push({Url:defaultImg})
                     } else {
                         this.banners = response.Data.Imagelist
                     }
                     //房间配置
-                    this.houseConfig = response.Data.ProductList
+                    for(var i=0;i<this.houseConfig.length;i++){
+                        for(var j=0;j<response.Data.ProductList.length;j++){
+                            if(response.Data.ProductList[j].Type == this.houseConfig[i].Type){
+                                this.houseConfig[i].active = true
+                                this.houseConfig[i].Num = response.Data.ProductList[j].Num
+                            }
+                        }
+                    }
+                    // this.houseConfig = response.Data.ProductList
                     setTimeout(() => {
                         this.loading = false
                     }, 1000)
@@ -723,9 +803,11 @@ export default {
                             this.$message.success('预约看房成功')
                             this.$refs[formName].resetFields();
                         }else{
+                            this.btnLoading = false
                             this.$message.error(res.Info)
                         }
                     }).catch(error => {
+                        this.btnLoading = false
                         this.$message.error(error)
                     })
                 } else {
@@ -840,13 +922,13 @@ export default {
         line-height: 26px;
         text-align: center;
         cursor: pointer;
-        border: 1px solid #009688;
+        border: 1px solid #bb0068;
         margin-right: 5px;
         color: #333;
     }
     ul li.active {
         color: #fff;
-        background-color: #009688;
+        background-color: #bb0068;
     }
 }
 .site-title {
@@ -895,7 +977,7 @@ export default {
             width: 24px;
             height: 24px;
             line-height: 24px;
-            background-color: #009688;
+            background-color: #bb0068;
             color: #fff;
             text-align: center;
             border-radius: 50%;
@@ -937,11 +1019,16 @@ ul.villageDetails-item-nav {
             }
             h4{
                 margin-top:20px;
-                color:#009688;
-                font-size:20px;
+                // color:#bb0068;
+                font-size:18px;
             }
             p{
                 margin-top:10px;
+            }
+            &.green{
+                p{
+                    color:#bb0068;
+                }
             }
         }
     }
@@ -960,6 +1047,32 @@ ul.villageDetails-item-nav {
         width:60%;
         display: block;
         margin:0 auto;
+    }
+}
+/*icon*/
+@font-face {font-family: "iconfont";
+  src: url('../assets/css/iconfont.eot'); /* IE9*/
+  src: url('../assets/css/iconfont.eot#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../assets/css/iconfont.woff') format('woff'), /* chrome, firefox */
+  url('../assets/css/iconfont.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../assets/css/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+ul.houseCongfigLists{
+    li{
+        float: left;
+        margin-bottom:25px;
+        >i.iconfont{
+            font-size: 60px;
+        }
     }
 }
 </style>

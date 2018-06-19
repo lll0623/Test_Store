@@ -151,15 +151,15 @@ export default {
 			}
 		};
 	},
-	// beforeRouteEnter(to, from, next) {
-	// 	next(vm => {
-	// 		vm.$store.commit('SET_HEADTOGGLE', 1)
-	// 	})
-	// },
-	// beforeRouteLeave(to, from, next) {
-	// 	this.$store.commit('SET_HEADTOGGLE', 0)
-	// 	next()
-	// },
+	beforeRouteEnter(to, from, next) {
+		next(vm => {
+			vm.$store.commit('SET_HEADTOGGLE', 1)
+		})
+	},
+	beforeRouteLeave(to, from, next) {
+		this.$store.commit('SET_HEADTOGGLE', 0)
+		next()
+	},
 	methods: {
 		handleClick(tab, event) {
 		},
@@ -324,10 +324,10 @@ export default {
 
 <style lang="scss">
 .el-tabs__item.is-active {
-    color: #009688 !important;
+    color: #bb0068 !important;
 }
 .el-tabs__item:hover {
-    color: #009688 !important;
+    color: #bb0068 !important;
     cursor: pointer;
 }
 .el-tabs__active-bar {
@@ -360,24 +360,24 @@ export default {
     border-radius: 3px;
 }
 .nextBtn {
-    background: #009688 !important;
-    border-color: #009688 !important;
+    background: #bb0068 !important;
+    border-color: #bb0068 !important;
     color: white !important;
     width: 100%;
     &:hover {
-        background: #18ab9d !important;
-        border-color: #18ab9d !important;
+        background: #e4007f !important;
+        border-color: #e4007f !important;
         color: white !important;
     }
 }
 .findPassWordBackground {
     display: flex;
-    background: url("http://tstres.lesoft.cn/menber/contents/images/userbg.jpg");
+    background:url("../assets/images/login.jpg") no-repeat center;
     background-repeat: no-repeat;
     background-size: cover;
 	.box-card {
 	    width: 480px;
-	    margin: 60px auto;
+	    margin: 160px auto;
 	    display: inline-table;
 		border: none !important;
 	}
@@ -385,10 +385,10 @@ export default {
 .linkBtn {
     float: right;
     padding: 3px 0;
-    color: #009688 !important;
+    color: #bb0068 !important;
     &:hover {
         text-decoration: underline;
-        color: #009688;
+        color: #bb0068;
     }
 }
 .open_close {
@@ -399,6 +399,6 @@ export default {
     height: 20px;
     cursor: pointer;
     font-size: 20px;
-    color: #009688;
+    color: #bb0068;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-<div class="loginBackground" @keyup.enter="submitForm('ruleForm')" ref='loginBox' id="loginhEAD">
+<div class="loginBackground" @keyup.enter="submitForm('ruleForm')" ref='loginBox' id="loginhEAD" style="position:relative;top:0px;">
 	<el-card class="box-card">
 		<div slot="header" class="clearfix">
 			<span style="font-size:28px">登录</span>
@@ -8,7 +8,7 @@
 			</router-link>
 		</div>
 		<el-form :model="ruleForm" label-position="right" :rules="rules" ref="ruleForm" label-width="130px" class="demo-ruleForm">
-			<el-form-item label="用户名/手机号码：" prop="Account">
+			<el-form-item label="手机号码：" prop="Account">
 				<el-input type="text" placeholder="请输入用户名或手机号" v-model="ruleForm.Account" auto-complete="off" @keyup.enter.native="submitForm('ruleForm')"></el-input>
 			</el-form-item>
 			<el-form-item label="密码：" prop="Password">
@@ -109,7 +109,7 @@ export default {
 		next()
 	},
 	mounted() {
-		this.$refs.loginBox.style.minHeight = (document.documentElement.clientHeight - document.getElementById('header').offsetHeight) + 'px'
+		this.$refs.loginBox.style.minHeight = (document.documentElement.clientHeight - document.getElementById('header').offsetHeight) + 60+'px'
 	},
 	methods: {
 		submitForm(formName) {
@@ -185,7 +185,7 @@ export default {
 	.box-card {
 	    width: 500px !important;
 		display: inline-table;
-	    margin: 60px auto;
+	    margin: 160px auto 0;
 	}
 }
 .yanzhengma_input {
@@ -214,20 +214,20 @@ export default {
 .linkBtn {
     float: right;
     padding: 3px 0;
-    color: #009688 !important;
+    color: #bb0068 !important;
     &:hover {
         text-decoration: underline;
-        color: #009688;
+        color: #bb0068;
     }
 }
 .loginBtn {
-    background: #009688 !important;
-    border-color: #009688 !important;
+    background: #bb0068 !important;
+    border-color: #bb0068 !important;
     color: white !important;
     width: 100%;
     &:hover {
-        background: #18ab9d !important;
-        border-color: #18ab9d !important;
+        background: #e4007f !important;
+        border-color: #e4007f !important;
         color: white !important;
     }
 }
@@ -239,11 +239,11 @@ export default {
     height: 20px;
     cursor: pointer;
     font-size: 20px;
-    color: #009688;
+    color: #bb0068;
 }
 .loginBackground {
     display: flex;
-    background: url("http://tstres.lesoft.cn/menber/contents/images/userbg.jpg") no-repeat center;
+    background: url("../assets/images/login.jpg") no-repeat center;
 	background-size:cover;
 }
 .qrcode-img {

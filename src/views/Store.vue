@@ -61,7 +61,7 @@
 </template>
 <script type="es6">
     import { getStoreLists,getScreenArea} from '../api/api.js'
-    import defaultImg from '../assets/images/default.jpg'
+    import defaultImg from '../assets/images/room_default.jpg'
     import { isNull } from '../util'
     export default{
         data(){
@@ -194,9 +194,9 @@
                 this.loading = true
                 var params = {
                     QueryJson:{
-                        Type: '1',
+                        // Type: '1',
                         KeyWord : this.search_input,
-                        Area:this.AreaId,
+                        AreaId:this.AreaId,
                         RoomState:1,
                     },
                     Page:this.page,
@@ -219,7 +219,7 @@
             },
             //获取区域筛选条件
             getScreenAreaFunc(){
-                getScreenArea().then(response => {
+                getScreenArea({CityCode:"310100",AreaCode:"",Type:2}).then(response => {
                     var data = [{
                         AreaName:'不限',
                         AreaId:null,
@@ -254,21 +254,12 @@
             this.getScreenAreaFunc()
             this.getVillageListsFunc()
         },
-        beforeRouteEnter (to,from,next) {
-            next(vm =>{
-                document.body.style.backgroundColor = '#eee'
-            })
-        },
-        beforeRouteLeave(to,from,next){
-            document.body.style.backgroundColor = '#fff'
-            next()
-        },
     }
 </script>
 <style lang="scss">
 .lookForhouse{
     padding:10px;
-    border:1px solid #009688;
+    border:1px solid #bb0068;
     top:10px;
     border-radius: 3px;
     background: #ecf5ff;

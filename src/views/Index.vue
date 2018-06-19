@@ -2,7 +2,24 @@
     <div class="index-wrapper">
         <div class="rel">
             <swiper :options="swiperOption2" class="indexBanner">
-                <swiper-slide v-for="(item,index) in indexBanner" :key="index"><img :src="item.Image"></swiper-slide>
+                <swiper-slide v-for="(item,index) in indexBanner" :key="index">
+                    <router-link :to="`/newsdetails/${item.Id}`" v-if="item.Type == 1"><!-- 新闻 -->
+                        <img :src="item.Image">
+                    </router-link>
+                    <router-link to v-else-if="item.Type == 2"><!-- 公告 -->
+                        <img :src="item.Image">
+                    </router-link>
+                    <router-link to v-else-if="item.Type == 4"><!-- 品牌介绍 -->
+                        <img :src="item.Image">
+                    </router-link>
+                    <router-link to v-else-if="item.Type == 5"><!-- 合作联系 -->
+                        <img :src="item.Image">
+                    </router-link>
+                    <router-link to v-else-if="item.Type == 7"><!-- 计加入我们 -->
+                        <img :src="item.Image">
+                    </router-link>
+                    <img :src="item.Image" v-else>
+                </swiper-slide>
                 <div class="swiper-button-prev" slot="button-prev"></div>
                 <div class="swiper-button-next" slot="button-next"></div>
                 <div class="swiper-pagination" slot="pagination"></div>
@@ -26,7 +43,7 @@
                 <swiper :options="swiperOption" class="canSelHouseLists">
                     <swiper-slide v-for="(item,index) in storeLists" :key="index">
                         <router-link :to="{name:'户型',query:{id:item.Id}}" class="clearfix">
-                            <img v-lazy="item.MainPic == null ? defaultImg : item.img"  onerror="javascript:this.src='../assets/images/defined.png';" :alt="item.tit" class="fl">
+                            <img v-lazy="item.MainPic == null ? room_default : item.img"  onerror="javascript:this.src='../assets/images/room_default.jpg';" :alt="item.tit" class="fl">
                             <div class="fl">
                                 <h4 class="ellipsis">{{item.AllName}}</h4>
                                 <p class="c-7">
@@ -41,7 +58,7 @@
                                     </span>
                                 </p>
                                 <p class="red">
-                                    <i class="fa fa-usd fa-lg"></i>
+                                    <i class="fa fa-jpy fa-lg"></i>
                                     <span>
                                         租金范围：
                                         <span>{{item.SRental}}~{{item.ERental}}</span>
@@ -60,10 +77,10 @@
                     <h2 class="fs30 c-3 fl">推荐户型<small class="fs14 c-7 marL10">好户型那么多，我们为你精选</small></h2>
                     <router-link class="fr fs14 c-8" to="/houseType">查看更多&gt;&gt;</router-link>
                 </div>
-                <swiper :options="swiperOption3" class="canSelHouseLists">
+                <swiper :options="swiperOption3" class="canSelHouseLists canSelHouseLists2">
                     <swiper-slide v-for="(item,index) in houseLists" :key="index">
                         <router-link :to="`/houseDetails/${item.Id}`" class="clearfix">
-                            <img v-lazy="item.img == null ? defaultImg : item.img"  onerror="javascript:this.src='../assets/images/defined.png';" :alt="item.tit" class="fl">
+                            <img v-lazy="item.img == null ? room_default : item.img"  onerror="javascript:this.src='../assets/images/room_default.jpg';" :alt="item.tit" class="fl">
                             <div class="fl">
                                 <h4 class="ellipsis">{{item.FullName}}</h4>
                                 <p class="c-7">
@@ -75,7 +92,7 @@
                                     <span>{{item.Name}}</span>
                                 </p>
                                 <p class="red">
-                                    <i class="fa fa-usd fa-lg rel" style="top:2px;left:2px;"></i>
+                                    <i class="fa fa-jpy fa-lg rel" style="top:2px;left:2px;"></i>
                                     <span>
                                         租金范围：
                                         <span>{{item.MinPrice}}-{{item.MaxPrice}}</span>
@@ -94,11 +111,11 @@
                     <router-link class="fr fs14 c-8" to="/news">查看更多&gt;&gt;</router-link>
                 </div>
                 <div class="index_news_lists clearfix marB30" >
-                    <router-link :to="`/newsview/${newslists[0].Id}`">
+                    <router-link :to="`/newsDetails/${newslists[0].Id}`">
                         <img v-lazy="newslists[0].MainPic == null ? defaultImg : newslists[0].MainPic">
                         <div class="abs">
                             <h4 class="fs18 white marB10">{{newslists[0].FullHead}}</h4>
-                            <div class="c-3" v-html="unescape(newslists[0].NewsContent)"></div>
+                            <div class="c-f0f0f0" v-html="unescape(newslists[0].NewsContent)"></div>
                         </div>
                     </router-link>
                     <div class="fl">
@@ -120,7 +137,7 @@
             <div class="site-title clearfix">
                 <h2 class="fs30 c-3 tc">选择我们的理由</h2>
             </div>
-            <ul class="selectUs clearfix marB30 index_guide_listst">
+            <!-- <ul class="selectUs clearfix marB30 index_guide_listst">
                 <li>
                     <a href="javascript:;" class="block tc">
                         <img src="../assets/images/s_01.png">
@@ -149,18 +166,21 @@
                         <div class="c-3">结识有意思的人，Party in V,呼朋唤友一起躁</div>
                     </a>
                 </li>
-            </ul>
+            </ul> -->
+            <div class="indexBg"></div>
         </div>
     </div>
 </template>
 <script type="es6">
 import { getIndexBanner,getHotStoreHouselists,getNews} from '../api/api.js'
+import room_default from '../assets/images/room_default.jpg'
 import defaultImg from '../assets/images/default.jpg'
 import { isNull } from '../util'
 export default {
     data(){
         return {
             defaultImg,
+            room_default,
             indexBanner:[],
             swiperOption2:{
                 navigation: {
@@ -176,7 +196,7 @@ export default {
             //门店介绍
             swiperOption: {
                 slidesPerView: 2,
-                spaceBetween: 0,
+                spaceBetween:10,
                 autoplay: true,
                 loop:true,
                 pagination: {
@@ -352,7 +372,7 @@ export default {
 </script>
 <style lang="scss">
     .swiper-pagination-bullet-active{
-        background: #009688;
+        background: #bb0068;
     }
     .indexBanner{
         height: 100%;
@@ -443,7 +463,7 @@ export default {
         a{
             margin-top:16px;
             &:hover{
-                color:#009688;
+                color:#bb0068;
             }
         }
     }
@@ -452,7 +472,7 @@ export default {
         .canSelHouseLists.swiper-container{
             margin-bottom:20px;
             overflow: hidden;
-            width:1173px;
+            width:1170px;
             .swiper-wrapper{
                 width:100%;
                 .swiper-slide{
@@ -465,8 +485,10 @@ export default {
         }
         /*更多房源*/
         .canSelHouseLists .swiper-slide{
-            box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+            /*box-shadow: 0 3px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 2px 0 rgba(0, 0, 0, 0.12);*/
             margin:10px 0px 10px 0px;
+            background: #ffff;
+            border-radius: 3px;
             a{
                 padding:15px;
                 display: block;
@@ -474,6 +496,7 @@ export default {
                     width:240px;
                     height:150px;
                     margin-right:20px;
+                    border-radius: 3px;
                 }
                 >div.fl{
                     width:285px;
@@ -494,17 +517,21 @@ export default {
                         position: relative;
                         >i{
                             position: absolute;
-                            top:0;
+                            top:4px;
                             left:0;
                         }
                     }
                 }
                 &:hover{
                     h4{
-                        color:#009688;
+                        color:#bb0068;
                     }
                 }
             }
+        }
+        .canSelHouseLists2 .swiper-slide a img{
+            width:100%;
+            margin-right:0;
         }
     }
     /*新闻*/
@@ -570,6 +597,7 @@ export default {
                 &:nth-of-type(1){
                     height:175px;
                     img{
+                        width:100%;
                         height:100%;
                     }
                 }
@@ -612,15 +640,16 @@ export default {
                 min-height:150px;
                 padding:15px;
                 box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
-                border-radius: 2px;
+                border-radius: 3px;
                 margin-right:30px;
                 cursor: default;
+                background: #fff;
                 img{
                     width:60%;
                 }
                 &:hover{
                     h4{
-                        color:#009688;
+                        color:#bb0068;
                     }
                 }
             }
@@ -630,5 +659,11 @@ export default {
                 }
             }
         }
+    }
+    .indexBg{
+        border-radius:3px;
+        background:url("../assets/images/IndexBg.png") no-repeat center;
+        background-size:130% auto;
+        height:200px;
     }
 </style>

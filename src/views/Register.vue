@@ -40,8 +40,8 @@
 			<el-form-item prop="agree" label-width="40px">
 				<el-checkbox v-model="registerForm2.type" label="agree" @change="handType()">
 					我已经阅读并同意
-					<router-link :to="`/terms`">
-						<el-button class="linkBtn" type="text">《公租房注册用户条款与声明》</el-button>
+					<router-link class="linkBtn" style="padding:0px;">
+						《用户条款与声明》
 					</router-link>
 				</el-checkbox>
 				<div class="tishixiaoxi" v-show="this.showCheckbox">请接受我们的声明</div>
@@ -336,7 +336,7 @@ export default {
 		}
 	},
 	mounted() {
-		this.$refs.loginBox.style.minHeight = (document.documentElement.clientHeight - document.getElementById('header').offsetHeight) + 'px'
+		this.$refs.loginBox.style.minHeight = (document.documentElement.clientHeight - document.getElementById('header').offsetHeight) + 60+'px'
 	},
 	created() {}
 }
@@ -363,20 +363,20 @@ export default {
 .linkBtn {
     float: right;
     padding: 3px 0;
-    color: #009688 !important;
+    color: #bb0068 !important;
     &:hover {
         text-decoration: underline;
-        color: #009688;
+        color: #bb0068;
     }
 }
 .loginBtn {
-    background: #009688 !important;
-    border-color: #009688 !important;
+    background: #bb0068 !important;
+    border-color: #bb0068 !important;
     color: white !important;
     width: 100%;
     &:hover {
-        background: #18ab9d !important;
-        border-color: #18ab9d !important;
+        background: #e4007f !important;
+        border-color: #e4007f !important;
         color: white !important;
     }
 }
@@ -388,7 +388,7 @@ export default {
     height: 20px;
     cursor: pointer;
     font-size: 20px;
-    color: #009688;
+    color: #bb0068;
 }
 .tishixiaoxi {
     margin-top: -7px;
@@ -402,13 +402,13 @@ export default {
 }
 .registerBackground {
     display: flex;
-    background: url("http://tstres.lesoft.cn/menber/contents/images/userbg.jpg");
+    background:url("../assets/images/login.jpg") no-repeat center;
 	background-repeat: no-repeat;
     background-size: cover;
 	.box-card {
 	    width: 500px !important;
 		display: inline-table;
-	    margin: 60px auto;
+	    margin: 160px auto;
 	}
 }
 </style>

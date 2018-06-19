@@ -16,23 +16,6 @@ export default {
   data() {
       return{}
   },
-  beforeRouteEnter (to,from,next) {
-      next(vm =>{
-          document.body.style.backgroundColor = '#eee'
-      })
-  },
-  beforeRouteLeave(to,from,next){
-      document.body.style.backgroundColor = '#fff'
-      next()
-  },
-  head() {
-    return {
-      meta: [{
-        hid: 'description',
-        name: 'description'
-      }]
-    }
-  }
 }
 </script>
 <style media="screen">
